@@ -1,0 +1,25 @@
+trigger:
+  - dev  # Executa o pipeline quando houver mudanças na branch "dev"
+
+pool:
+  vmImage: 'ubuntu-latest'  # Usa um agente Linux
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install robotframework robotframework-seleniumlibrary
+    displayName: 'Instalar Python e dependências'
+
+  - script: |
+      robot -d results tests/
+    displayName: 'Executar Testes Robot Framework'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publicar Resultados dos Testes'
+    inputs:
+      pathToPublish: results
+      artifactName: TestResults
