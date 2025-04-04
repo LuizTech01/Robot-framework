@@ -4,12 +4,14 @@ Resource   ../resources/keywords.robot
 Resource   ../resources/variables.robot
 
 *** Test Cases ***
-Fazer Login
-    Fazer Login    ${EMAIL_LOCATOR}    ${SENHA_LOCATOR}    ${EMAIL}    ${SENHA}
-    Confirma Login      ${URL_PRODUTOS}
+Login com Credenciais Válidas
+    Acessar Página de Login
+    Fazer Login
+    Validar Login com Sucesso
     Fechar Navegador
 
-Fazer Login invalido
-    Abrir Navegador Login
-    Fazer Login invalido      ${EMAIL_INVALIDO_LOCATOR}    ${SENHA_LOCATOR}    ${EMAIL_INVALIDO}    ${SENHA}
-    Validar Mensagem de Erro Login      ${ERRO_TITULO_LOGIN_LOCATOR}    ${ERRO_MENSAGEM_LOGIN_LOCATOR}
+Login com Credenciais Inválidas
+    Acessar Página de Login
+    Fazer Login Invalido
+    Validar Mensagem de Erro no Login
+    Fechar Navegador
