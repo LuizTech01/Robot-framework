@@ -1,6 +1,0 @@
-robotframework
-robotframework-seleniumlibrary
-robotframework-requests
-robotframework-jsonlibrary
-robotframework-faker
-chromedriver-autoinstaller
