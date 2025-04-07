@@ -14,22 +14,21 @@ steps:
       sudo apt install -y wget unzip xvfb libxi6 libgconf-2-4
       wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt -f install -y
-      CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-      DRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.version")
-      wget "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip"
-      unzip chromedriver-linux64.zip
-      sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
-      sudo chmod +x /usr/local/bin/chromedriver
-    displayName: 'Instalar Chrome e ChromeDriver'
+    displayName: 'Instalar Chrome'
 
   - script: |
-      pip install -U pip
+      pip install --upgrade pip
       pip install robotframework robotframework-seleniumlibrary
     displayName: 'Instalar dependências Python'
 
   - script: |
+      sudo chmod +x drivers/chromedriver
+      sudo mv drivers/chromedriver /usr/local/bin/chromedriver
+    displayName: 'Usar chromedriver local'
+
+  - script: |
       xvfb-run robot -d results tests/
-    displayName: 'Executar testes com Xvfb'
+    displayName: 'Executar Testes Robot Framework com Xvfb'
 
   - task: PublishBuildArtifacts@1
     inputs:
