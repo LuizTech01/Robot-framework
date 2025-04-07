@@ -10,7 +10,7 @@ Resource   variables.robot
 
 Abrir Navegador
     [Arguments]    ${URL}
-    Open Browser    ${URL}    chrome    ${CHROME_ARGS}
+    Open Browser    ${URL}    chrome
     Maximize Browser Window
 
 Fechar Navegador
