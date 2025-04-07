@@ -34,7 +34,7 @@ jobs:
       - name: Run Robot Framework tests
         run: |
           mkdir -p results
-          python -m robot results tests/
+          python -m robot tests/
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
