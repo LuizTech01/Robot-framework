@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.8 on win32)" generated="2025-04-07T09:16:22.136963" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\luizf\OneDrive\Documents\Robot-framework\tests">
+<suite id="s1-s1" name="Login Tests" source="C:\Users\luizf\OneDrive\Documents\Robot-framework\tests\login_tests.robot">
+<test id="s1-s1-t1" name="Login com Credenciais Válidas" line="7">
+<kw name="Acessar Página de Login" owner="keywords">
+<kw name="Abrir Navegador" owner="keywords">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:16:22.723585" level="INFO">Opening browser 'chrome' to base url 'https://wde-5p3f.onrender.com/login'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<arg>add_argument(--no-sandbox)</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-07T09:16:22.723585" elapsed="45.684707"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-07T09:17:08.408292" elapsed="0.051154"/>
+</kw>
+<arg>${URL_LOGIN}</arg>
+<status status="PASS" start="2025-04-07T09:16:22.722585" elapsed="45.736861"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:16:22.721589" elapsed="45.737857"/>
+</kw>
+<kw name="Fazer Login" owner="keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:08.460446" level="INFO">Typing text 'emailteste@gmail.com' into text field 'id=email'.</msg>
+<arg>${EMAIL_LOCATOR}</arg>
+<arg>${EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:08.460446" elapsed="0.118618"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:08.579064" level="INFO">Typing text 'senhateste1232' into text field 'id=password'.</msg>
+<arg>${SENHA_LOCATOR}</arg>
+<arg>${SENHA}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:08.579064" elapsed="0.091082"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:08.670146" level="INFO">Clicking button 'class=btn'.</msg>
+<arg>${LOGIN_BTN_LOCATOR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:08.670146" elapsed="5.788004"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:08.459446" elapsed="5.998704"/>
+</kw>
+<kw name="Validar Login com Sucesso" owner="keywords">
+<kw name="Wait Until Location Is" owner="SeleniumLibrary">
+<arg>${URL_PRODUTOS}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the current URL is ``expected``.</doc>
+<status status="PASS" start="2025-04-07T09:17:14.459189" elapsed="0.005958"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:14.470149" level="INFO">${URL_ATUAL} = https://wde-5p3f.onrender.com/products</msg>
+<var>${URL_ATUAL}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2025-04-07T09:17:14.465147" elapsed="0.005002"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${URL_ATUAL}</arg>
+<arg>${URL_PRODUTOS}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-04-07T09:17:14.470149" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:14.459189" elapsed="0.010960"/>
+</kw>
+<kw name="Fechar Navegador" owner="keywords">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-07T09:17:14.471175" elapsed="2.221157"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:14.471175" elapsed="2.221157"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:16:22.720591" elapsed="53.972716"/>
+</test>
+<test id="s1-s1-t2" name="Login com Credenciais Inválidas" line="13">
+<kw name="Acessar Página de Login" owner="keywords">
+<kw name="Abrir Navegador" owner="keywords">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:16.695336" level="INFO">Opening browser 'chrome' to base url 'https://wde-5p3f.onrender.com/login'.</msg>
+<arg>${URL}</arg>
+<arg>chrome</arg>
+<arg>add_argument(--no-sandbox)</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-04-07T09:17:16.695336" elapsed="3.079074"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-04-07T09:17:19.774903" elapsed="0.036633"/>
+</kw>
+<arg>${URL_LOGIN}</arg>
+<status status="PASS" start="2025-04-07T09:17:16.695336" elapsed="3.116200"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:16.694330" elapsed="3.117206"/>
+</kw>
+<kw name="Fazer Login Invalido" owner="keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:19.812535" level="INFO">Typing text 'emailtesteeeeee@gmail.com' into text field 'id=email'.</msg>
+<arg>${EMAIL_INVALIDO_LOCATOR}</arg>
+<arg>${EMAIL_INVALIDO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:19.812535" elapsed="0.135046"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:19.948580" level="INFO">Typing text 'senhateste1232' into text field 'id=password'.</msg>
+<arg>${SENHA_LOCATOR}</arg>
+<arg>${SENHA}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:19.947581" elapsed="0.092758"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:20.040339" level="INFO">Clicking button 'class=btn'.</msg>
+<arg>${LOGIN_BTN_LOCATOR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:20.040339" elapsed="6.693652"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:19.812535" elapsed="6.921456"/>
+</kw>
+<kw name="Validar Mensagem de Erro no Login" owner="keywords">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=section.alert</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-07T09:17:26.735014" elapsed="0.027968"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:26.793972" level="INFO">${titulo_atual} = INVALID CREDENTIALS</msg>
+<var>${titulo_atual}</var>
+<arg>css=.alert h2</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:26.762982" elapsed="0.030990"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-04-07T09:17:26.815923" level="INFO">${mensagem_atual} = Invalid credentials - please double-check your email and password!</msg>
+<var>${mensagem_atual}</var>
+<arg>css=.alert p</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-07T09:17:26.793972" elapsed="0.021951"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${titulo_atual}</arg>
+<arg>${ERRO_TITULO_LOGIN_LOCATOR}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-04-07T09:17:26.816922" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${mensagem_atual}</arg>
+<arg>${ERRO_MENSAGEM_LOGIN_LOCATOR}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-04-07T09:17:26.816922" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:26.735014" elapsed="0.081908"/>
+</kw>
+<kw name="Fechar Navegador" owner="keywords">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-07T09:17:26.817922" elapsed="2.143266"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:26.817922" elapsed="2.143266"/>
+</kw>
+<status status="PASS" start="2025-04-07T09:17:16.694330" elapsed="12.266858"/>
+</test>
+<status status="PASS" start="2025-04-07T09:16:22.199136" elapsed="66.764076"/>
+</suite>
+<status status="PASS" start="2025-04-07T09:16:22.139965" elapsed="66.824245"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="2" fail="0" skip="0">Tests</stat>
+<stat name="Login Tests" id="s1-s1" pass="2" fail="0" skip="0">Tests.Login Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
