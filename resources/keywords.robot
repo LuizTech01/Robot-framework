@@ -41,6 +41,7 @@ Validar Registro com Sucesso
 # Login
 
 Acessar Página de Login
+    Set Selenium Timeout  20s
     Abrir Navegador    ${URL_LOGIN}
 
 Fazer Login
