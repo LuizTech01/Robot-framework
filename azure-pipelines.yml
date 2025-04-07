@@ -32,6 +32,7 @@ steps:
 
   - script: |
       robot -d results tests/login_tests.robot
+      robot --loglevel DEBUG tests/
     displayName: 'Executar Testes Robot Framework'
 
   - task: PublishBuildArtifacts@1
