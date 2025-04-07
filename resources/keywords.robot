@@ -10,7 +10,7 @@ Resource   variables.robot
 
 Abrir Navegador
     [Arguments]    ${URL}
-    Open Browser    ${URL}    chrome
+    Open Browser    ${URL}    chrome    add_argument(--no-sandbox)
     Maximize Browser Window
 
 Fechar Navegador
