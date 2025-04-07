@@ -17,26 +17,16 @@ steps:
   - script: |
       # Instalar o Google Chrome
       wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
+      sudo apt install ./google-chrome-stable_current_amd64.deb -y
 
-      # Obter a versão exata do Chrome instalado
-      CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-
-      echo "Versão do Chrome: $CHROME_VERSION"
-
-      # Baixar o ChromeDriver compatível
-      DRIVER_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
-      
-      echo "Baixando driver de: $DRIVER_URL"
-      wget -O chromedriver.zip "$DRIVER_URL" || (echo "Erro ao baixar o driver. URL pode não existir." && exit 1)
-      
+      # Baixar o ChromeDriver compatível com o Chrome
+      CHROME_VERSION=$(google-chrome --version | grep -oP "\d+\.\d+\.\d+" | head -1)
+      CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json" | jq -r ".channels.Stable.downloads.chromedriver[] | select(.platform == \"linux64\") | select(.url | test(\"$CHROME_VERSION\")) | .url")
+      wget -O chromedriver.zip $CHROMEDRIVER_VERSION
       unzip chromedriver.zip
-      chmod +x chromedriver-linux64/chromedriver
       sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
-
-      # Validar instalação
-      chromedriver --version
-    displayName: 'Instalar ChromeDriver correto'
+      sudo chmod +x /usr/local/bin/chromedriver
+    displayName: 'Instalar Chrome e ChromeDriver'
 
   - script: |
       robot -d results tests/
