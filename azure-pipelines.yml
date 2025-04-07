@@ -10,21 +10,21 @@ steps:
       versionSpec: '3.x'
 
   - script: |
+      sudo apt-get update
+      sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4 libappindicator1 fonts-liberation libnss3 lsb-release xdg-utils
+      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt --fix-broken install -y
+      sudo apt-get install -y google-chrome-stable
+      wget -N https://chromedriver.storage.googleapis.com/$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)/chromedriver_linux64.zip
+      unzip chromedriver_linux64.zip
+      sudo mv chromedriver /usr/local/bin/
+      sudo chmod +x /usr/local/bin/chromedriver
+    displayName: 'Instalar Google Chrome e ChromeDriver'
+
+  - script: |
       python -m pip install --upgrade pip
       pip install robotframework robotframework-seleniumlibrary
     displayName: 'Instalar Python e dependências'
-
-  - script: |
-      sudo apt-get update
-      sudo apt-get install -y wget unzip
-      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      sudo apt install -y ./google-chrome-stable_current_amd64.deb
-      CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-      wget -O chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROME_VERSION}/chromedriver_linux64.zip || wget -O chromedriver.zip https://chromedriver.storage.googleapis.com/$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
-      unzip chromedriver.zip
-      sudo mv chromedriver /usr/local/bin/
-      sudo chmod +x /usr/local/bin/chromedriver
-    displayName: 'Instalar Chrome e ChromeDriver'
 
   - script: |
       robot -d results tests/
