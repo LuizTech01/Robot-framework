@@ -31,7 +31,6 @@ steps:
   - script: |
       robot -d results tests/
     displayName: 'Executar Testes Robot Framework'
-    continueOnError: true
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publicar Resultados dos Testes'
