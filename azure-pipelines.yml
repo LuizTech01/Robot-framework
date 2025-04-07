@@ -31,8 +31,7 @@ steps:
     displayName: 'Instalar Chrome e ChromeDriver'
 
   - script: |
-      robot -d results tests/login_tests.robot
-      robot --loglevel DEBUG tests/
+      robot --loglevel DEBUG -d results tests/login_tests.robot
     displayName: 'Executar Testes Robot Framework'
 
   - task: PublishBuildArtifacts@1
