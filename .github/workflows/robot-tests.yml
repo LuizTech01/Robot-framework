@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
+        uses: actions/upload-artifact@v3
+
 
       - name: Instalar dependências do sistema
         run: |
