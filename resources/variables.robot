@@ -14,3 +14,5 @@ ${CIDADE}        Paquestao
 ${EMAIL_INVALIDO}       emailtesteeeeee@gmail.com
 ${ERRO_TITULO_LOGIN_LOCATOR}    INVALID CREDENTIALS
 ${ERRO_MENSAGEM_LOGIN_LOCATOR}    Invalid credentials - please double-check your email and password!
+
+${CHROME_ARGS}    --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/chrome-profile
