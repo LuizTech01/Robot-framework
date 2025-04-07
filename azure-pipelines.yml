@@ -10,21 +10,13 @@ steps:
       versionSpec: '3.x'
 
   - script: |
-      wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_134.0.6998.165-1_amd64.deb
-      sudo dpkg -i google-chrome-stable_134.0.6998.165-1_amd64.deb || sudo apt --fix-broken install -y
-      wget https://chromedriver.storage.googleapis.com/134.0.7998.107/chromedriver_linux64.zip
-      unzip chromedriver_linux64.zip
-      sudo mv chromedriver /usr/local/bin/
-      sudo chmod +x /usr/local/bin/chromedriver
-    displayName: 'Instalar Chrome e ChromeDriver compatíveis'
-
-
-  - script: |
       python -m pip install --upgrade pip
       pip install robotframework robotframework-seleniumlibrary
     displayName: 'Instalar Python e dependências'
 
   - script: |
+      chmod +x drivers/chromedriver
+      export PATH=$PATH:$(pwd)/drivers
       robot -d results tests/
     displayName: 'Executar Testes Robot Framework'
 
