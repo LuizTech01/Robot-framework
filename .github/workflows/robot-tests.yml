@@ -1,10 +1,10 @@
-name: Robot Framework Tests
+name: Run Robot Framework Tests
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "main", "dev" ]
 
 jobs:
   robot-tests:
@@ -24,15 +24,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Robot Framework tests
+      - name: Install Chrome
         run: |
-          robot tests/
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+          wget -O chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROME_VERSION%.*}/chromedriver_linux64.zip" || echo "Trying fallback"
+          unzip chromedriver.zip
+          sudo mv chromedriver /usr/local/bin/
 
-      - name: Upload Robot Framework reports
+      - name: Run Robot Framework Tests
+        run: |
+          mkdir -p /tmp/chrome_profile
+          robot --variable USER_DATA_DIR:/tmp/chrome_profile tests/
+
+      - name: Upload Robot Results
         uses: actions/upload-artifact@v4
         with:
-          name: robot-report
+          name: robot-results
           path: |
-            log.html
-            report.html
             output.xml
+            report.html
+            log.html
