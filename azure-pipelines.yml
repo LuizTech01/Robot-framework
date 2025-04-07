@@ -10,28 +10,40 @@ steps:
       versionSpec: '3.x'
 
   - script: |
-      sudo apt update
-      sudo apt install -y wget unzip xvfb libxi6 libgconf-2-4
-      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt -f install -y
-    displayName: 'Instalar Chrome'
-
-  - script: |
-      pip install --upgrade pip
+      python -m pip install --upgrade pip
       pip install robotframework robotframework-seleniumlibrary
-    displayName: 'Instalar dependências Python'
+    displayName: 'Instalar Python e dependências'
 
   - script: |
-      sudo chmod +x drivers/chromedriver
-      sudo mv drivers/chromedriver /usr/local/bin/chromedriver
-    displayName: 'Usar chromedriver local'
+      # Instalar o Google Chrome
+      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
+
+      # Obter a versão exata do Chrome instalado
+      CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+
+      echo "Versão do Chrome: $CHROME_VERSION"
+
+      # Baixar o ChromeDriver compatível
+      DRIVER_URL="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
+      
+      echo "Baixando driver de: $DRIVER_URL"
+      wget -O chromedriver.zip "$DRIVER_URL" || (echo "Erro ao baixar o driver. URL pode não existir." && exit 1)
+      
+      unzip chromedriver.zip
+      chmod +x chromedriver-linux64/chromedriver
+      sudo mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+
+      # Validar instalação
+      chromedriver --version
+    displayName: 'Instalar ChromeDriver correto'
 
   - script: |
-      xvfb-run robot -d results tests/
-    displayName: 'Executar Testes Robot Framework com Xvfb'
+      robot -d results tests/
+    displayName: 'Executar Testes Robot Framework'
 
   - task: PublishBuildArtifacts@1
+    displayName: 'Publicar Resultados dos Testes'
     inputs:
       pathToPublish: results
       artifactName: TestResults
-    displayName: 'Publicar Resultados dos Testes'
